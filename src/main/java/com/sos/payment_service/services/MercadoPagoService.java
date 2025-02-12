@@ -3,18 +3,24 @@ package com.sos.payment_service.services;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sos.payment_service.models.AccessToken;
+import com.sos.payment_service.repository.AccessTokenRepository;
 
 @Service
 public class MercadoPagoService {
@@ -24,6 +30,8 @@ public class MercadoPagoService {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
+    @Autowired
+    private AccessTokenRepository accessTokenRepository;
 
     public MercadoPagoService(RestTemplate restTemplate, ObjectMapper objectMapper) {
         this.restTemplate = restTemplate;
@@ -118,6 +126,18 @@ public class MercadoPagoService {
             // Log or handle error
             System.err.println("Erro ao buscar detalhes do pagamento: " + response.getStatusCode());
             return null;
+        }
+    }
+
+    public void insertToken(String token){
+        Optional<AccessToken> existingAccessToken = accessTokenRepository.findByToken(token);
+
+        if(existingAccessToken.get().getToken().equals(token) ){
+         throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Token de acesso já cadastrado.");
+        }else{
+           var accessToken = new AccessToken(); 
+           accessToken.setToken(token);
+           accessTokenRepository.save(accessToken);
         }
     }
 }
