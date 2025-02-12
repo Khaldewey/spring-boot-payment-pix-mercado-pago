@@ -1,7 +1,9 @@
 package com.sos.payment_service.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.sos.payment_service.models.PaymentRequest;
 import com.sos.payment_service.services.MercadoPagoService;
@@ -42,6 +44,22 @@ public class PaymentController {
             return ResponseEntity.ok(qrCodeBase64); // Retorna o QR code em base64
         } else {
             return ResponseEntity.status(500).body("Erro ao criar pagamento Pix");
+        }
+    }
+    
+    // Endpoint para inserir o token
+    @PostMapping("/insert-token")
+    public ResponseEntity<String> insertToken(@RequestBody String token) {
+        try {
+            // Chama o serviço para inserir ou substituir o token
+            mercadoPagoService.insertToken(token);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Token cadastrado com sucesso.");
+        } catch (ResponseStatusException e) {
+            // Retorna o erro com o status apropriado se o token for inválido
+            return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
+        } catch (Exception e) {
+            // Caso ocorra qualquer outro erro inesperado
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno do servidor: " + e.getMessage());
         }
     }
 }

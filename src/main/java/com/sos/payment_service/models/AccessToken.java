@@ -26,6 +26,6 @@ public class AccessToken {
     private Long id;
 
     @Column(name = "token", nullable = false)
-    private String token;
+    private String token; 
 
 }

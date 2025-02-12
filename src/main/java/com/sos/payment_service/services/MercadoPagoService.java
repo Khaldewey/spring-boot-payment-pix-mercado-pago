@@ -3,11 +3,9 @@ package com.sos.payment_service.services;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,20 +20,34 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sos.payment_service.models.AccessToken;
 import com.sos.payment_service.repository.AccessTokenRepository;
 
+import jakarta.annotation.PostConstruct;
+
 @Service
 public class MercadoPagoService {
 
-    @Value("${mercadopago.access.token}")
     private String accessToken;
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
-    @Autowired
-    private AccessTokenRepository accessTokenRepository;
-
-    public MercadoPagoService(RestTemplate restTemplate, ObjectMapper objectMapper) {
+    private final AccessTokenRepository accessTokenRepository;
+     
+    public MercadoPagoService(RestTemplate restTemplate, ObjectMapper objectMapper, AccessTokenRepository accessTokenRepository) {
         this.restTemplate = restTemplate;
         this.objectMapper = objectMapper;
+        this.accessTokenRepository = accessTokenRepository;
+        this.loadAccessToken();
+    }
+    
+    // Método para carregar o token do banco de dados
+    private void loadAccessToken() {
+        List<AccessToken> accessTokenOptional = accessTokenRepository.findAll();
+        
+        if (!accessTokenOptional.isEmpty()) {
+            this.accessToken = accessTokenOptional.get(0).getToken();
+        } else {
+            System.out.println("Token não cadastrado");
+            // throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Token não encontrado no banco de dados.");
+        }
     }
 
     public String createPixPayment(double amount) {
@@ -92,7 +104,7 @@ public class MercadoPagoService {
     if (response.getStatusCode().is2xxSuccessful()) {
         try {
             JsonNode responseJson = objectMapper.readTree(response.getBody());
-            String paymentId = responseJson.get("id").asText();
+            // String paymentId = responseJson.get("id").asText();
             String qrCodeBase64 = responseJson.get("point_of_interaction")
                                                .get("transaction_data")
                                                .get("qr_code_base64")
@@ -129,15 +141,25 @@ public class MercadoPagoService {
         }
     }
 
-    public void insertToken(String token){
-        Optional<AccessToken> existingAccessToken = accessTokenRepository.findByToken(token);
-
-        if(existingAccessToken.get().getToken().equals(token) ){
-         throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Token de acesso já cadastrado.");
-        }else{
-           var accessToken = new AccessToken(); 
-           accessToken.setToken(token);
-           accessTokenRepository.save(accessToken);
+    public void insertToken(String token) {
+        // Valida se o token não é nulo ou vazio
+        if (token == null || token.trim().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Token não pode ser vazio.");
         }
+    
+        // Verifica se já existe um token registrado
+        Optional<AccessToken> existingAccessToken = accessTokenRepository.findByToken(token);
+    
+        // Se existir um token, removemos o antigo antes de inserir o novo
+        if (existingAccessToken.isPresent()) {
+            accessTokenRepository.delete(existingAccessToken.get());  // Remove o token antigo
+        }
+    
+        // Cria o novo token e salva
+        AccessToken newAccessToken = new AccessToken();
+        newAccessToken.setToken(token);
+        accessTokenRepository.save(newAccessToken);
     }
+
+    
 }
