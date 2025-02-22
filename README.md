@@ -44,7 +44,7 @@ cd
 Acesse o sistema em: `http://localhost:3000`
 
 ## 🔧 Configuração do Banco de Dados
-O sistema utiliza **PostgreSQL**. Certifique-se de configurar corretamente o `database.yml`.
+O sistema utiliza **PostgreSQL**. Certifique-se de configurar corretamente o 'application.properties'.
 Exemplo de configuração:
 
 ```yml
