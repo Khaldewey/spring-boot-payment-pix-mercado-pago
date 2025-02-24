@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MercadoPagoService {
     
     //Aqui é colocado o token obtido na plataforma do mercado pago
-    @Value("SEU-TOKEN-AQUI")
+    @Value("${access.token}")
     private String accessToken;
 
     private final RestTemplate restTemplate;
@@ -77,7 +77,7 @@ public class MercadoPagoService {
     );
     HttpHeaders headers = new HttpHeaders();
     headers.set("Content-Type", "application/json");
-    headers.set("Authorization", "Bearer " + accessToken);
+    headers.set("Authorization", "Bearer " + accessToken.replace("\"", ""));
     headers.set("X-Idempotency-Key", idempotencyKey);
 
     HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);

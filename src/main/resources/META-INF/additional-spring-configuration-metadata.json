@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "access.token",
+  "type": "java.lang.String",
+  "description": "Token para autenticação utilizada na requisição"
+}]}
