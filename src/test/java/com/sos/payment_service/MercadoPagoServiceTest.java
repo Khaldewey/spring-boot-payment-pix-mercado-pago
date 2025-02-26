@@ -12,8 +12,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,9 +32,12 @@ public class MercadoPagoServiceTest {
     @InjectMocks
     private MercadoPagoService mercadoPagoService;
 
+    
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this); // Inicializa os mocks
+        ReflectionTestUtils.setField(mercadoPagoService, "accessToken", "fakeAccessToken12345"); // Simula o valor do accessToken
     }
 
     @Test
