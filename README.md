@@ -1,6 +1,6 @@
-# API Pagamento Pix Mercado Pago ![Tests](https://github.com/khaldewey/ruby_on_rails_easy_xml/actions/workflows/ruby.yml/badge.svg)
-[![Maintainability](https://api.codeclimate.com/v1/badges/19c22735419d5499e036/maintainability)](https://codeclimate.com/github/Khaldewey/ruby_on_rails_easy_xml/maintainability) 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/19c22735419d5499e036/test_coverage)](https://codeclimate.com/github/Khaldewey/ruby_on_rails_easy_xml/test_coverage)
+# API Pagamento Pix Mercado Pago ![Tests](https://github.com/khaldewey/spring-boot-payment-pix-mercado-pago/actions/workflows/maven.yml/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/85dfb262dae854699ef0/maintainability)](https://codeclimate.com/github/Khaldewey/spring-boot-payment-pix-mercado-pago/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/85dfb262dae854699ef0/test_coverage)](https://codeclimate.com/github/Khaldewey/spring-boot-payment-pix-mercado-pago/test_coverage)
 
 ## 📌 Sobre o Projeto
 Este projeto é um sistema de criação de pagamento pix, armazenamento dos detalhes de pagamentos em base de dados para registro e consulta de situação de pagamento pix feito com **Spring Boot**.
