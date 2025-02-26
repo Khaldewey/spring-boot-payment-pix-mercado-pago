@@ -34,17 +34,16 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn package
     - name: Set environment variable
       run: echo "ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }}" >> $GITHUB_ENV
-
-    # Configurando variáveis de ambiente para o banco de dados
+     # Configurando variáveis de ambiente para o banco de dados
     - name: Set database environment variables
       run: |
         echo "DATABASE_URL=jdbc:postgresql://localhost:5432/payment_db" >> $GITHUB_ENV
         echo "DATABASE_USER=postgres" >> $GITHUB_ENV
         echo "DATABASE_PASSWORD=postgres" >> $GITHUB_ENV
+    - name: Build with Maven
+      run: mvn package
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
