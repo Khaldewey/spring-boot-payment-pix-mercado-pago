@@ -44,6 +44,10 @@ jobs:
         echo "DATABASE_PASSWORD=postgres" >> $GITHUB_ENV
     - name: Build with Maven
       run: mvn package
+    - name: Install Code Climate Test Reporter
+      run: npm install -g cc-test-reporter
+    - name: Build with Maven and run tests
+      run: mvn test
     - name: Upload coverage to Code Climate
       run: |
         cc-test-reporter before-build
