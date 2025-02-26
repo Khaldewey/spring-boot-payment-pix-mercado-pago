@@ -44,7 +44,8 @@ jobs:
         echo "DATABASE_PASSWORD=postgres" >> $GITHUB_ENV
     - name: Build with Maven
       run: mvn package
-    - name: Publish code coverage
-      uses: paambaati/codeclimate-action@v3.0.0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+    - name: Upload coverage to Code Climate
+      run: |
+        cc-test-reporter before-build
+        mvn test
+        cc-test-reporter after-build --coverage-input-type jacoco --exit-code ${{ job.status }}
