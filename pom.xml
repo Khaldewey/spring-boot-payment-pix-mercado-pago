@@ -111,6 +111,11 @@
                         <goal>prepare-agent</goal>
                         <goal>report</goal>
                     </goals>
+					<configuration>
+						<outputDirectory>${project.build.directory}/test-coverage</outputDirectory>
+						<output>file</output>
+						<append>true</append>
+					</configuration>
                 </execution>
             </executions>
         </plugin>
