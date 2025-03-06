@@ -113,8 +113,9 @@
                     </goals>
 					<configuration>
 						<outputDirectory>${project.build.directory}/test-coverage</outputDirectory>
-						<output>file</output>
-						<append>true</append>
+						<formats>
+							<format>XML</format>
+						</formats>
 					</configuration>
                 </execution>
             </executions>
