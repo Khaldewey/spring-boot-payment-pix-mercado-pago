@@ -54,4 +54,5 @@ jobs:
     - name: Upload coverage to Code Climate
       run: |
         codeclimate-test-reporter before-build
-        codeclimate-test-reporter after-build --coverage-input-type jacoco --coverage-input-path target/test-coverage/jacoco.xml --exit-code ${{ job.status }}
+        codeclimate-test-reporter after-build --coverage-input-type jacoco-xml --coverage-input-path target/test-coverage/jacoco.xml --exit-code ${{ job.status }}
+
