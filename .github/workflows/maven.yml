@@ -49,7 +49,9 @@ jobs:
     - name: Install Code Climate Test Reporter
       run: npm install -g codeclimate-test-reporter
     - name: Build with Maven and run tests
-      run: mvn clean test
+      run: | 
+        mvn clean test
+        cat target/test-coverage/jacoco.xml
     - name: List files for debugging
       run: |
         ls -R target/test-coverage

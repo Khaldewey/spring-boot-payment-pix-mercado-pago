@@ -111,6 +111,7 @@
                         <goal>prepare-agent</goal>
                         <goal>report</goal>
                     </goals>
+					<phase>test</phase> 
 					<!-- <configuration>
 						<outputDirectory>${project.build.directory}/test-coverage</outputDirectory>
 						<formats>
@@ -124,7 +125,6 @@
 					<configuration>
 						<outputDirectory>target/test-coverage</outputDirectory> <!-- Defina a pasta onde o relatório será gerado -->
 						<dataFile>target/jacoco.exec</dataFile> <!-- Arquivo de dados -->
-						<append>false</append>
 					</configuration>
                 </execution>
             </executions>
