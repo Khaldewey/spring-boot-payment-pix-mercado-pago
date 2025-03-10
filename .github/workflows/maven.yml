@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     services:
@@ -21,7 +20,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: payment_db
         options: >-
-          --health-cmd="pg_isready -U postgres" 
+          --health-cmd="pg_isready -U postgres"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -55,4 +54,3 @@ jobs:
       run: |
         codeclimate-test-reporter before-build
         codeclimate-test-reporter after-build --coverage-input-type jacoco-xml --coverage-input-path target/test-coverage/jacoco.xml --exit-code ${{ job.status }}
-
