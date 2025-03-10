@@ -50,7 +50,7 @@ jobs:
       run: npm install -g codeclimate-test-reporter
     - name: Build with Maven and run tests
       run: mvn clean test
-    - name: Upload coverage to Code Climate
-      run: |
-        codeclimate-test-reporter before-build
-        codeclimate-test-reporter after-build --coverage-input-type jacoco-xml --coverage-input-path target/test-coverage/jacoco.xml --exit-code ${{ job.status }}
+    - name: Publish code coverage
+      uses: paambaati/codeclimate-action@v3.0.0
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
