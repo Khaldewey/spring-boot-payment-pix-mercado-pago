@@ -111,16 +111,16 @@
                         <goal>prepare-agent</goal>
                         <goal>report</goal>
                     </goals>
-					<configuration>
+					<!-- <configuration>
 						<outputDirectory>${project.build.directory}/test-coverage</outputDirectory>
 						<formats>
 							<format>XML</format>
 						</formats>
-					</configuration>
-					<!-- <configuration>
+					</configuration> -->
+					<configuration>
 						<outputDirectory>target/test-coverage</outputDirectory> 
 						<dataFile>target/jacoco.exec</dataFile>
-          			</configuration> -->
+          			</configuration>
                 </execution>
             </executions>
         </plugin>
