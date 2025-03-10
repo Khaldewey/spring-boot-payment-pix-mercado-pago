@@ -117,10 +117,15 @@
 							<format>XML</format>
 						</formats>
 					</configuration> -->
-					<configuration>
+					<!-- <configuration>
 						<outputDirectory>target/test-coverage</outputDirectory> 
 						<dataFile>target/jacoco.exec</dataFile>
-          			</configuration>
+          			</configuration> -->
+					<configuration>
+						<outputDirectory>target/test-coverage</outputDirectory> <!-- Defina a pasta onde o relatório será gerado -->
+						<dataFile>target/jacoco.exec</dataFile> <!-- Arquivo de dados -->
+						<append>false</append>
+					</configuration>
                 </execution>
             </executions>
         </plugin>

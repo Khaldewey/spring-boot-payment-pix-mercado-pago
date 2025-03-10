@@ -50,7 +50,15 @@ jobs:
       run: npm install -g codeclimate-test-reporter
     - name: Build with Maven and run tests
       run: mvn clean test
+    - name: List files for debugging
+      run: |
+        ls -R target/test-coverage
     - name: Publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
+      with:
+        debug: true
+        coverageCommand: mvn clean test
+        coverageInputType: jacoco
+        coverageInputPath: target/test-coverage/jacoco.xml
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
