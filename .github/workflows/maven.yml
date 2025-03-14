@@ -56,4 +56,4 @@ jobs:
         JACOCO_SOURCE_PATH: "${{ github.workspace }}/src/main/java" 
       with:
         coverageCommand: mvn test  # O comando que roda os testes
-        coverageLocations:  ${{github.workspace}}/target/site/jacoco/jacoco.xml:jacoco
+        coverageLocations: ${{github.workspace}}/**/target/site/jacoco/jacoco.xml:jacoco
