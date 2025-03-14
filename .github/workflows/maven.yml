@@ -53,7 +53,6 @@ jobs:
     - name: Build with Maven and run tests
       run: | 
         mvn clean test
-        cat target/test-coverage/jacoco.xml
     - name: List files for debugging
       run: |
         ls -R target/test-coverage
