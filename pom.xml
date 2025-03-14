@@ -123,6 +123,9 @@
 						<dataFile>target/jacoco.exec</dataFile>
           			</configuration> -->
 					<configuration>
+						<formats>
+							<format>XML</format>
+						</formats>
 						<outputDirectory>target/test-coverage</outputDirectory> <!-- Defina a pasta onde o relatório será gerado -->
 						<dataFile>target/jacoco.exec</dataFile> <!-- Arquivo de dados -->
 					</configuration>
