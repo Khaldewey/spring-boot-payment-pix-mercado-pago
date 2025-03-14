@@ -46,10 +46,6 @@ jobs:
         echo "DATABASE_PASSWORD=postgres" >> $GITHUB_ENV
     - name: Set CODECLIMATE_REPO_TOKEN
       run: echo "CODECLIMATE_REPO_TOKEN=${{ secrets.CODECLIMATE_REPO_TOKEN }}" >> $GITHUB_ENV
-    - name: Install Code Climate Test Reporter
-      run: npm install -g codeclimate-test-reporter
-    - name: Create coverage directory
-      run: mkdir -p target/test-coverage
     - name: Build with Maven and run tests
       run: | 
         mvn clean test
