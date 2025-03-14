@@ -111,6 +111,10 @@
 					<goal>prepare-agent</goal>
 					<goal>report</goal>
 				</goals>
+				<configuration>
+					<outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
+					<outputFile>jacoco.xml</outputFile>
+            	</configuration>
 				</execution>
 			</executions>
     	</plugin>
