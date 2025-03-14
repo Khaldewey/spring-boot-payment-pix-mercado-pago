@@ -54,10 +54,10 @@ jobs:
       run: | 
         mvn clean test
     - name: Publish code coverage
-      uses: paambaati/codeclimate-action@v3.0.0
-      with:
-        debug: true
-        coverageCommand: mvn clean test
-        coverageLocations: target/test-coverage/jacoco.xml
+      uses: paambaati/codeclimate-action@v9.0.0
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
+        JACOCO_SOURCE_PATH: "${{ github.workspace }}/src/main/java" 
+      with:
+        coverageCommand: mvn test  # O comando que roda os testes
+        coverageLocations: ${{ github.workspace }}/target/site/jacoco/jacoco.xml:jacoco  # Localização do arquivo de cobertura gerado pelo Jacoco
