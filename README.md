@@ -18,39 +18,6 @@ Este projeto é um sistema de criação de pagamento pix, armazenamento dos deta
 
 
 
-
-
-## 🛠️ Como Configurar o Projeto
-### 📥 Clonar o Repositório
-```bash
-git clone https://github.com/Khaldewey
-cd 
-```
-
-### 📦 Instalar Dependências
-```bash
-
-```
-
-### ⚙️ Configurar o Banco de Dados
-```bash
-
-```
-
-### 🚀 Iniciar o Servidor
-```bash
-
-```
-Acesse o sistema em: `http://localhost:3000`
-
-## 🔧 Configuração do Banco de Dados
-O sistema utiliza **PostgreSQL**. Certifique-se de configurar corretamente o 'application.properties'.
-Exemplo de configuração:
-
-```yml
-
-```
-
 ## 📜 Licença
 Este projeto está sob a licença MIT. Sinta-se livre para modificá-lo e usá-lo como preferir.
 
